@@ -10,14 +10,14 @@ const blogSchema = new Schema({
     subtitle:{
         type: String
     },
-    descriptio:{
-        type: Text
+    discription:{
+        type: String
     },
     image:{
         type: String
     }
 })
-const blog = mongoose.model('blog',blogSchema);
+const blog = mongoose.model('blog',blogSchema);//blog is a table adn blogSchema is columns in table
 module.exports = blog;
 
 
