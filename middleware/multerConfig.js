@@ -8,3 +8,5 @@ const storage = multer.diskStorage({
         cb(null, 'Bimal-' + file.originalname);
     }
 })
+
+module.exports = {multer,storage};
