@@ -21,6 +21,7 @@ app.post("/blog",upload.single('image'), async(req,res)=>{
     //only text content from frontend always comes in req.body
 
     const {title,discription,image,subtitle} = req.body;
+    const filename = req.file.filename;
     if(!title || !discription || !subtitle){
         return res.status(400).json({
             message: "Please enter title, discription, subtitle"
@@ -28,12 +29,26 @@ app.post("/blog",upload.single('image'), async(req,res)=>{
     }
 
     await blog.create({
-        title,discription,image,subtitle
+        title,discription,image,subtitle,
+        image:filename
     })
     res.status(200).json({
         message : "Blog api hit success"
     })
 });
+
+app.get("/blog", async (req,res)=>{
+    const blogs =await blog.find(); //find returns array
+    res.status(200).json({
+        message: "Data found successfully",
+        data: blogs
+    })
+})
+app.get("/about", (req,res)=>{
+    res.json({
+        message:"This is about section"
+    })
+})
 
 app.listen(process.env.PORT, ()=>{
     console.log('New Project 1');
