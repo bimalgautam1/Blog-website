@@ -45,9 +45,19 @@ app.get("/blog", async (req,res)=>{
     })
 })
 
-app.get("/blog/:id",(req,res)=>{
+app.get("/blog/:id",async(req,res)=>{
     const id = req.params.id;
-    
+    const blogId = await blog.findById(id) //object return
+    if(!blogId){
+        res.status(404).json({
+            message:"Blog not found"
+        })
+    }
+    else{
+        res.status(200).json({
+        message:"fetched success",
+        data: blogId
+    })}
 })
 
 app.get("/about", (req,res)=>{
