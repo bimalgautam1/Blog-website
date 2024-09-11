@@ -38,12 +38,18 @@ app.post("/blog",upload.single('image'), async(req,res)=>{
 });
 
 app.get("/blog", async (req,res)=>{
-    const blogs =await blog.find(); //find returns array
+    const blogs = await blog.find(); //find returns array
     res.status(200).json({
         message: "Data found successfully",
         data: blogs
     })
 })
+
+app.get("/blog/:id",(req,res)=>{
+    const id = req.params.id;
+    
+})
+
 app.get("/about", (req,res)=>{
     res.json({
         message:"This is about section"
