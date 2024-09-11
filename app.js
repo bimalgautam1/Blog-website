@@ -8,6 +8,7 @@ const {multer, storage} = require('./middleware/multerConfig.js');
 const upload = multer({storage:storage});
 require('dotenv').config();
 app.use(express.json());
+const fs = require('fs')
 
 
 connecttodb();
@@ -60,10 +61,24 @@ app.get("/blog/:id",async(req,res)=>{
     })}
 })
 
-app.delete("/blogs/:id",async(req,res)=>{
+app.delete("/blog/:id",async(req,res)=>{
     const id = req.params.id
-    const blogId =  await blog.findByIdAndDelete(id)
-})
+    const blogDetails = blog.findById(id)
+    const imageName = blogDetails.image
+    fs.unlink(`storage/${imageName}`,(err)=>{
+        if(err){
+            console.error(err);
+        }else{
+            console.log('Data deleted success')
+        }
+        
+    })
+    await blog.findByIdAndDelete(id)
+    res.status(200).json({
+        message:"Deletion Complete"
+    })
+
+    })
 
 
 app.get("/about", (req,res)=>{
