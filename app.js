@@ -79,6 +79,19 @@ app.delete("/blog/:id",async(req,res)=>{
     })
     })
 
+app.patch('/blog/:id',(req,res)=>{
+    const id = req.params.id
+    const {title,subtitle,description}=req.body;
+    blog.findByIdAndUpdate(id,{
+        title:title,
+        subtitle:subtitle,
+        description:description
+    })
+    res.status(200).json({
+        message:"Blog updated Successfully"
+    })
+})
+
 
 app.get("/about", (req,res)=>{
     res.json({
