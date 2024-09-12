@@ -77,7 +77,6 @@ app.delete("/blog/:id",async(req,res)=>{
     res.status(200).json({
         message:"Deletion Complete"
     })
-
     })
 
 
