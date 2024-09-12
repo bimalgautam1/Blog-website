@@ -5,7 +5,7 @@ const storage = multer.diskStorage({
         cb(null, './storage') //null is for error, next arguement for store in storage
     },
     filename: function(req,file,cb){
-        cb(null, 'Bimal-' + file.originalname);
+        cb(null, Date.now() + file.originalname);
     }
 })
 
