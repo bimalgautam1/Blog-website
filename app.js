@@ -22,7 +22,7 @@ app.post("/blog",upload.single('image'), async(req,res)=>{
     //only text content from frontend always comes in req.body
 
     const {title,discription,image,subtitle} = req.body;
-    const filename = req.file.filename;
+    const filename = req.file.filename; //to select the image sent from client
     if(!title || !discription || !subtitle){
         return res.status(400).json({
             message: "Please enter title, discription, subtitle"
